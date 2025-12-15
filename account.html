@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akatsuki - Account</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="dark-mode">
+
+    <div id="preloader">
+        <div class="slime"></div>
+        <div class="loader-text">LOADING...</div>
+    </div>
+
+    <nav class="navbar">
+        <a href="home.html" class="nav-brand-link">
+            <div class="nav-brand">
+                <img src="default.png" alt="Logo" class="brand-img"> Akatsuki
+            </div>
+        </a>
+        <div class="user-controls">
+            <a href="mylist.html" class="nav-link">My List</a>
+            <a href="discover.html" class="nav-link">Browse</a>
+            
+            <span id="user-display" class="user-name" onclick="window.location.href='account.html'">Loading...</span>
+            
+            <img src="default.png" class="nav-avatar-mobile" alt="Profile" onclick="window.location.href='account.html'">
+            
+            <button id="logout-btn" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </nav>
+
+    <div class="account-wrapper">
+        <div class="account-card">
+            <div class="account-header">
+                <img id="current-avatar" src="default.png" class="profile-pic" alt="Profile">
+                <h2 id="header-name">User</h2>
+                <p id="header-email" style="color: #888; font-size: 0.9rem;">user@email.com</p>
+                <span id="guest-badge" class="badge-guest" style="display:none;">GUEST</span>
+            </div>
+
+            <div id="guest-bind-section" style="display: none; margin-bottom: 25px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Save Your Progress!</h3>
+                <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 15px;">Link an account so you don't lose your anime list.</p>
+                <div class="bind-buttons">
+                    <button onclick="linkProvider('google')" class="btn-bind google"><i class="fab fa-google"></i> Link Google</button>
+                    <button onclick="linkProvider('github')" class="btn-bind github"><i class="fab fa-github"></i> Link GitHub</button>
+                </div>
+            </div>
+
+            <form onsubmit="saveAccountSettings(event); return false;">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="acc-username" placeholder="Display Name">
+                </div>
+
+                <div class="form-group" id="email-update-section">
+                    <label>Change Email</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" id="acc-email" placeholder="New Email Address">
+                        <button type="button" onclick="updateUserEmail()" class="btn-small">Update</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Avatar URL (Image Link)</label>
+                    <input type="text" id="acc-avatar" placeholder="https://example.com/image.png" oninput="previewAvatar(this.value)">
+                </div>
+
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="acc-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-save">Save Profile Changes</button>
+            </form>
+
+            <div class="danger-zone">
+                <h3>Danger Zone</h3>
+                <p>Once you delete your account, there is no going back.</p>
+                <button onclick="deleteMyAccount()" class="btn-danger">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

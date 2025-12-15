@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akatsuki - Home</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="dark-mode">
+
+    <div id="preloader">
+        <div class="slime"></div>
+        <div class="loader-text">LOADING...</div>
+    </div>
+
+    <nav class="navbar">
+        <a href="home.html" class="nav-brand-link">
+            <div class="nav-brand">
+                <img src="default.png" alt="Logo" class="brand-img"> Akatsuki
+            </div>
+        </a>
+        <div class="user-controls">
+            <a href="mylist.html" class="nav-link">My List</a>
+            <a href="discover.html" class="nav-link">Browse</a>
+            <span id="user-display" class="user-name" onclick="window.location.href='account.html'">Loading...</span>
+            <img src="default.png" class="nav-avatar-mobile" alt="Profile" onclick="window.location.href='account.html'">
+            <button id="logout-btn" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1 id="hero-typewriter" class="hero-typewriter-text"></h1>
+        <p>Track all your favorite anime in one place.</p>
+        <a href="discover.html"><button class="cta-btn">Start Browsing</button></a>
+    </div>
+
+    <div class="section-title">All Time Popular</div>
+    
+    <div class="slider-wrapper">
+        <div class="slider-track" id="anime-list">
+            <div class="anime-card" style="background: #222;"></div>
+            <div class="anime-card" style="background: #222;"></div>
+            <div class="anime-card" style="background: #222;"></div>
+            <div class="anime-card" style="background: #222;"></div>
+            <div class="anime-card" style="background: #222;"></div>
+        </div>
+    </div>
+
+    <div id="anime-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-banner" id="modal-banner"></div>
+            <div class="modal-body">
+                <div class="modal-poster-container">
+                    <img id="modal-poster" src="" alt="">
+                    <div class="list-dropdown-container">
+                        <button class="list-btn-main" onclick="toggleListDropdown(event)">
+                            <span id="list-btn-text">Add to List</span> 
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="list-dropdown-menu" id="dropdown-menu">
+                            <div class="dropdown-item" onclick="saveAnimeToList('watching')"><i class="fas fa-play" style="color:var(--stat-watching)"></i> Watching</div>
+                            <div class="dropdown-item" onclick="saveAnimeToList('completed')"><i class="fas fa-check" style="color:var(--stat-completed)"></i> Completed</div>
+                            <div class="dropdown-item" onclick="saveAnimeToList('planning')"><i class="fas fa-bookmark" style="color:var(--stat-planning)"></i> Planning</div>
+                            <div class="dropdown-item" onclick="saveAnimeToList('dropped')"><i class="fas fa-trash" style="color:var(--stat-dropped)"></i> Dropped</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h1 id="modal-title">Anime Title</h1>
+                    <div class="modal-meta">
+                        <span id="modal-rating" class="rating-pill"><i class="fas fa-star"></i> N/A</span>
+                        <span id="modal-type">TV</span> • <span id="modal-episodes">? eps</span> • <span id="modal-status">Finished</span>
+                    </div>
+                    <div class="genres-container" id="modal-genres"></div>
+                    <h3>Synopsis</h3>
+                    <p id="modal-synopsis">Description goes here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
